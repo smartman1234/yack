@@ -1,0 +1,158 @@
+
+<ng-container *ngIf="post">
+  <div class="modal side" (click)="modalClick($event)">
+    <div class="content">
+      <div class="post-header">
+        <div class="inbox">
+          <img src="{{post.inbox.image}}" />
+          <span class="title">@{{post.inbox.name}}</span>
+        </div>
+
+        <div class="new" *ngIf="post.unread">
+          New
+        </div>
+
+        <!-- STATUS SELECT -->
+        <select
+          #selectstatus
+          class="colored"
+          (change)="selectStatusUpdate($event)"
+          [ngStyle]="{'background-color': post.status.color, color: 'white'}"
+          [(ngModel)]="post.status.name">
+          <option
+            *ngFor="let s of statuses; let i = index"
+            [ngValue]="s.name">{{s.name}}</option>
+        </select>
+
+        <button class="label-closed" (click)="close()">Close</button>
+      </div>
+
+      <div class="post-labels">
+        <div class="label" *ngFor="let postLabel of post.postLabels">
+          <div class="text">{{postLabel.label.text}}</div>
+          <div class="icon" (click)="deletePostLabel(postLabel.id, postLabel.label.text)"><span data-feather="x"></span></div>
+        </div>
+
+        <!-- Not the sexiest solution for managing focus -->
+        <div class="label add" (click)="dismissAccountLabelsMenu()" id="ignoreClickBlur">
+          <div class="text" id="ignoreClickBlur">Add</div>
+          <div class="icon" id="ignoreClickBlur"><span data-feather="plus" id="ignoreClickBlur"></span></div>
+
+          <ng-container *ngIf="accountLabelsMenu">
+            <div class="account-labels-menu">
+              <div
+                class="account-label"
+                *ngFor="let label of labels"
+                (blur)="dismissAccountLabelsMenu()"
+                (mousedown)="$event.preventDefault()"
+                (click)="addPostLabel(label)">
+                <div class="text">{{label.text}}</div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="post__summary">
+        <div class="post__summary-notices" *ngIf="error || notification">
+          <div class="post__summary-error" *ngIf="error">{{error}}</div>
+          <div class="post__summary-notification" *ngIf="notification">{{notification}}</div>
+        </div>
+
+        <div class="post__summary-row">
+          <div class="post__summary-user">From: {{post.name}} <a href="mailto:{{post.email}}">{{post.email}}</a></div>
+          <div class="post__summary-date">{{post.created_at}}</div>
+        </div>
+
+        <div class="post__summary-title">Subject: {{post.title}}</div>
+
+        <div class="post__summary-body">
+          <div [innerHTML]="post.description"></div>
+        </div>
+
+        <div class="post__summary-collapse" (click)="toggleMeta()">
+          <div class="post__summary-collapse-text">{{showMeta ? "- Hide client metadata" : "+ Show client metadata"}}</div>
+        </div>
+
+        <div [className]="showMeta ? 'post__summary-collapse-content' : 'post__summary-collapse-content hide'">
+          <div class="post__summary-field"><strong>Browser:</strong> {{post.browser}}</div>
+          <div class="post__summary-field"><strong>Agent:</strong> {{post.agent}}</div>
+        </div>
+
+        <div *ngIf="attachments.length != 0">
+          <div class="post__summary-collapse" (click)="toggleAttachments()">
+            <div class="post__summary-collapse-text">{{showAttachments ? "- Hide attachments" : "+ Show attachments"}} ({{attachments.length}})</div>
+          </div>
+
+          <div [className]="showAttachments ? 'post__summary-collapse-content' : 'post__summary-collapse-content hide'">
+            <div class="post__summary-attachment" *ngFor="let attachment of attachments">
+              <span data-feather="paperclip"></span>
+              <a href="{{attachment.url}}" target="_blank">{{attachment.filename}}</a>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="fields.length != 0">
+          <div class="post__summary-collapse" (click)="toggleFields()">
+            <div class="post__summary-collapse-text">{{showFields ? "- Hide additional fields" : "+ Show additional fields"}} ({{fields.length}})</div>
+          </div>
+
+          <div [className]="showFields ? 'post__summary-collapse-content' : 'post__summary-collapse-content hide'">
+            <div class="post__summary-fields" *ngFor="let field of fields">
+              <div class="post__summary-field"><strong>{{field.label}}</strong> {{field.value}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="post-comments">
+        <div
+          [className]="comment.email ? 'comment' : 'comment me'"
+          *ngFor="let comment of post.comments; let i = index">
+          <div class="line-top"></div>
+          <div class="line-bottom"></div>
+          <div class="line-dot"></div>
+
+          <div class="padding">
+            <div class="row">
+              <div class="user">{{!comment.email ? "You" : comment.email }}</div>
+              <div class="date">
+                {{comment.created_at}}
+                <span *ngIf="i == 0" class="latest">LATEST</span>
+              </div>
+            </div>
+
+            <div [className]="comment.email ? 'text them' : 'text you'">
+              {{comment.description}}
+            </div>
+
+            <ng-container *ngIf="comment.attachments && comment.email">
+              <ng-container *ngIf="comment.attachments.length != 0">
+                <div class="attachments">
+                  <div class="attachment" *ngFor="let attachment of comment.attachments">
+                    <span data-feather="paperclip"></span>
+                    <a href="{{attachment.url}}" target="_blank">{{attachment.filename}}</a>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <div class="post-reply">
+        <div class="loading" *ngIf="loadingCompose">
+          <img src="../../../assets/loading.svg" height="50" width="50" />
+        </div>
+        <textarea
+          placeholder="Type your reply here & press enter"
+          (keyup)="captureKeysPressed($event)"
+          [(ngModel)]="compose">
+        </textarea>
+      </div>
+    </div>
+    <div class="background"></div>
+  </div>
+</ng-container>

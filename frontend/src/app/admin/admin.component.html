@@ -1,0 +1,172 @@
+<app-post accountId="{{accountId}}" postId="{{postId}}" [labels]="labels" *ngIf="postModal"></app-post>
+<app-inbox accountId="{{accountId}}" inboxId="{{inboxId}}" *ngIf="inboxModal"></app-inbox>
+
+<div class="page-container">
+  <div class="modal" *ngIf="newLabelModalVisible">
+    <div class="content label">
+      <div class="input">
+        <input type="text" placeholder="New label text" [(ngModel)]="newLabelText" />
+      </div>
+      <div class="icon" (click)="createNewLabel()">
+        <span data-feather="check" class="icon"></span>
+      </div>
+      <div class="icon" (click)="hideNewLabelModal()">
+        <span data-feather="x" class="icon"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="color-border">
+    Welcome to the alpha version! Please let us know about any bugs, questions or general issues at <a href="mailto:support@yack.app">support@yack.app</a>.
+  </div>
+
+  <div class="container">
+    <div class="list">
+      <!-- Inbox container at top -->
+      <div class="inbox-selector__container">
+        <!-- Actual inbox name -->
+        <div class="inbox-selector__inbox"  (click)="openInboxPopup()">
+          <div class="inbox-selector__image" *ngIf="currentInbox" [ngStyle]="{ 'background-image': 'url(' + currentInbox.image + ')' }"></div>
+          <div class="inbox-selector__name">{{currentInbox ? currentInbox.name : "Select inbox"}}</div>
+          <div class="inbox-selector__unread" *ngIf="hasUnreadPostsForInbox()"></div>
+          <div class="inbox-selector__icon"><span data-feather="chevron-down"></span></div>
+        </div>
+
+        <!-- Inbox popup -->
+        <div #inboxPopupContainer [className]="inboxPopup ? 'inbox-selector__dropdown' : 'inbox-selector__dropdown hide'">
+          <ng-container *ngFor="let inbox of inboxes">
+            <div [className]="!currentInbox ? 'inbox-selector__dropdown-item' : currentInbox.id == inbox.id ? 'inbox-selector__dropdown-item current' : 'inbox-selector__dropdown-item'" (click)="openInbox(inbox, true)">
+              <div class="inbox-selector__dropdown-image" [ngStyle]="{ 'background-image': 'url( ' + inbox.image + ')' }"></div>
+              <div class="inbox-selector__dropdown-name">{{inbox.name}}</div>
+            </div>
+          </ng-container>
+          <div class="inbox-selector__new" *ngIf="showNewInbox">
+            <input #inboxName type="text" [(ngModel)]="newInboxName" placeholder="Inbox name" (keyup)="captureKeysPressed($event)" />
+          </div>
+          <div class="inbox-selector__new-button" (click)="toggleShowNewInbox()" *ngIf="showNewInbox">
+            <span data-feather="x" class="icon"></span>
+            Cancel
+          </div>
+          <div class="inbox-selector__new-button" (click)="toggleShowNewInbox()" *ngIf="!showNewInbox">
+            <span data-feather="plus" class="icon"></span>
+            Create new inbox
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-container">
+        <ng-container *ngIf="!!currentInbox">
+          <h1>Statuses</h1>
+
+          <ng-container *ngFor="let status of statuses">
+            <div [className]="currentStatus ? currentStatus.name == status.name ? 'item current' : 'item' : 'item'" (click)="getPostsByStatus(status, true)">
+              <div class="inner">
+                <div [className]="'select'" [ngStyle]="{'background': status.color}"></div>
+                <div class="text">
+                  {{status.name.toSentenceCase()}}
+                </div>
+                <div class="count label-red" *ngIf="hasUnreadPostsForStatus(status.name)"></div>
+              </div>
+            </div>
+          </ng-container>
+
+          <h1>Labels</h1>
+
+          <ng-container *ngFor="let label of labels">
+            <div [className]="currentLabel ? currentLabel.id == label.id ? 'item current' : 'item' : 'item'">
+              <div class="inner">
+                <div class="icon" *ngIf="labelDeleteIconsVisible" (click)="deleteLabel($event, label.id)">
+                  <span data-feather="x" class="icon"></span>
+                </div>
+                <!-- We put them here so to not interfere with the other click -->
+                <!-- because e.preventDefault() doesn't seem to stop the click event from bubbling up -->
+                <div class="select" (click)="getPostsByLabel(label, true)"></div>
+                <div class="text" (click)="getPostsByLabel(label, true)">
+                  {{label.text}}
+                </div>
+                <div class="count label-red" *ngIf="hasUnreadPostsForLabel(label.id)"></div>
+              </div>
+            </div>
+          </ng-container>
+
+          <button (click)="showLabelDeleteIcons()" *ngIf="!labelDeleteIconsVisible">
+            <span data-feather="edit-2" class="icon"></span>
+            Edit
+          </button>
+
+          <button (click)="hideLabelDeleteIcons()" *ngIf="labelDeleteIconsVisible">
+            <span data-feather="x-circle" class="icon"></span>
+            Cancel
+          </button>
+
+          <button (click)="showNewLabelModal()">
+            <span data-feather="plus" class="icon"></span>
+            Create new label
+          </button>
+
+        </ng-container>
+
+        <h1>Tools</h1>
+
+        <ng-container *ngIf="!!currentInbox">
+          <button (click)="openInboxModal(currentInbox.id)" *ngIf="!!currentInbox">
+            <span data-feather="settings" class="icon"></span>
+            Inbox settings
+          </button>
+        </ng-container>
+
+        <button (click)="logout()">
+          <span data-feather="log-out" class="icon"></span>
+          Logout
+        </button>
+
+        <a href="mailto:yack@inbox.yack.app" class="button">
+          <span data-feather="help-circle" class="icon"></span>
+          Support
+        </a>
+
+        <br/>
+        <br/>
+
+        <img src="../../../assets/logo-muted.svg" height="20" />
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="posts-heading" *ngIf="!!currentInbox || !!currentLabel || !!currentStatus">
+        <h1>{{allPosts.length}} / {{totalPosts}} {{allPosts.length == 1 ? "issue" : "issues"}} in <strong>{{title}}</strong></h1>
+      </div>
+
+      <div class="error" *ngIf="error">{{error}}</div>
+      <div class="notification" *ngIf="notification">{{notification}}</div>
+
+      <div class="no-posts" *ngIf="posts.length == 0">
+        <img src="../../../assets/logo-muted.svg" />
+      </div>
+
+      <div class="posts">
+        <ng-container *ngFor="let post of posts">
+          <div [className]="isPostUnread(post.id) ? 'post unread' : 'post'" (click)="openPostModal(post.id)">
+            <div class="title">
+              <span class="text">{{post.title}}</span>
+              <span class="label" *ngFor="let label of post.labels">{{label}}</span>
+              <span class="status" [ngStyle]="{'background': getBackgroundColorForStatusName(post.status)}">{{post.status}}</span>
+              <span class="date">{{post.updated_at}}</span>
+              <span class="inbox" *ngIf="!currentInbox">@{{post.inbox}}</span>
+            </div>
+          </div>
+        </ng-container>
+
+        <br />
+        <br />
+
+        <div class="posts-footer" *ngIf="totalPosts != allPosts.length">
+          <button class="load-more" (click)="loadMore()">
+            <span data-feather="arrow-down" class="icon"></span>
+            Load more
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="auth-page">
+  <div class="text-center form-signin">
+
+    <div class="color-border">
+      We've closed up shop! Thank you for all the support. For questions or general enquiries - please email us at <a href="mailto:support@yack.app">support@yack.app</a>.
+    </div>
+
+    <div class="notification" role="alert" *ngIf="!!notification">
+      {{notification}}
+    </div>
+
+    <div class="error" role="alert" *ngIf="!!error">
+      {{error}}
+    </div>
+
+    <!-- Login -->
+    <ng-container *ngIf="view == 'login'">
+      <img src="../../assets/logo.svg" alt="Logo" class="logo" />
+
+      <h1 class="h3 font-weight-normal">Please sign in</h1>
+
+      <input type="email" class="mb-1 form-control" placeholder="Email address" [(ngModel)]="email">
+      <input type="password" class="mb-1 form-control" placeholder="Password" [(ngModel)]="password">
+
+      <button class="mb-1 btn btn-lg btn-dark btn-block" (click)="login()">Sign in</button>
+
+      <div class="text-center mt-3">
+        <a href="javascript:void(0)" class="mr-3" (click)="navigate('signup')">Create an account</a>
+        <a href="javascript:void(0)" class="mr-0" (click)="navigate('reset')">Reset my password</a>
+      </div>
+    </ng-container>
+
+    <!-- Sign up -->
+    <ng-container *ngIf="view == 'signup'">
+      <h1 class="h3 font-weight-normal">Create an account</h1>
+
+      <input type="email" class="mb-1 form-control" placeholder="Email address" [(ngModel)]="email">
+      <input type="text" class="mb-1 form-control" placeholder="Full name" [(ngModel)]="name">
+      <input type="password" class="mb-1 form-control" placeholder="Password" [(ngModel)]="password">
+      <input type="password" class="mb-1 form-control" placeholder="Confirm password" [(ngModel)]="confirmPassword">
+
+      <button class="mb-1 btn btn-lg btn-dark btn-block" (click)="signup()">Create an account</button>
+
+      <div class="text-center mt-3">
+        <a href="javascript:void(0)" class="mr-3" (click)="navigate('login')">← Go back</a>
+      </div>
+    </ng-container>
+
+    <!-- Reset password / send email -->
+    <ng-container *ngIf="view == 'reset'">
+      <h1 class="h3 font-weight-normal">Reset your password</h1>
+
+      <input type="email" class="mb-1 form-control" placeholder="Email address" [(ngModel)]="email">
+
+      <button class="mb-1 btn btn-lg btn-dark btn-block" (click)="reset()">Reset now</button>
+
+      <div class="text-center mt-3">
+        <a href="javascript:void(0)" class="mr-3" (click)="navigate('login')">← Go back</a>
+        <a href="javascript:void(0)" class="mr-0" (click)="navigate('update')">I have a reset code →</a>
+      </div>
+    </ng-container>
+
+    <!-- Update password / received email -->
+    <ng-container *ngIf="view == 'update'">
+      <h1 class="h3 font-weight-normal">Update your password</h1>
+
+      <input type="text" class="mb-1 form-control" placeholder="Reset token" [(ngModel)]="resetToken">
+      <input type="email" class="mb-1 form-control" placeholder="Email address" [(ngModel)]="email">
+      <input type="password" class="mb-1 form-control" placeholder="Password" [(ngModel)]="password">
+      <input type="password" class="mb-1 form-control" placeholder="Confirm password" [(ngModel)]="confirmPassword">
+
+      <button class="mb-1 btn btn-lg btn-dark btn-block" (click)="update()">Update password</button>
+
+      <div class="text-center mt-3">
+        <a href="javascript:void(0)" class="mr-3" (click)="navigate('reset')">← Go back</a>
+      </div>
+    </ng-container>
+
+    <p class="mt-5 mb-3 text-muted">Yack © 2020</p>
+  </div>
+</div>

@@ -1,0 +1,266 @@
+<div class="modal inbox">
+  <div class="content">
+    <div class="tabs">
+      <div [className]="tab == 0 ? 'tab current' : 'tab'" (click)="showTab(0)">Details</div>
+      <div [className]="tab == 1 ? 'tab current' : 'tab'" (click)="showTab(1)">Widget</div>
+      <div [className]="tab == 2 ? 'tab current' : 'tab'" (click)="showTab(2)">Form</div>
+      <div [className]="tab == 3 ? 'tab current' : 'tab'" (click)="showTab(3)">Installation</div>
+      <div [className]="tab == 4 ? 'tab current' : 'tab'" (click)="showTab(4)">Subscription</div>
+      <!--
+      <div [className]="tab == 2 ? 'tab current' : 'tab'" (click)="showTab(2)" *ngIf="inboxId != 0">Launch 🚀</div>
+      -->
+
+      <div class="buttons">
+        <button (click)="delete()" class="red" *ngIf="inboxId != 0">Delete</button>
+        <button (click)="save()">{{inboxId == 0 ? "Create" : "Save"}}</button>
+        <button (click)="close()">Close</button>
+      </div>
+    </div>
+
+    <div class="tab-content">
+      <div class="padding" *ngIf="tab == 0">
+        <div class="error" *ngIf="error">{{error}}</div>
+        <div class="notification" *ngIf="notification">{{notification}}</div>
+
+        <div class="row body-content">
+          <div class="column image">
+            <form [formGroup]= "uploadForm" (ngSubmit)="onSubmit()">
+              <img [src]="image" class="inbox-image" />
+
+              <div class="hide">
+                <input
+                  #fileInput
+                  type="file"
+                  name="image"
+                  (change)="onFileSelect($event)"
+                  accept="image/x-png,image/gif,image/jpeg,image/jpg,image/png"
+                />
+              </div>
+
+              <div class="image-button-row">
+                <button (click)="fileInput.click()">Update inbox image</button>
+                <button type="submit" class="hide">Upload</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="column flexer fields">
+            <div class="column">
+              <label>Name</label>
+              <input type="text" placeholder="Inbox name" [(ngModel)]="name" />
+            </div>
+
+            <div class="column">
+              <label>URL</label>
+              <input type="text" placeholder="https://coolness.com" [(ngModel)]="website" />
+            </div>
+
+            <div class="column">
+              <label>Unique slug (unique)</label>
+              <input type="text" placeholder="slug" [(ngModel)]="slug" />
+            </div>
+
+            <div class="column">
+              <label>Description</label>
+              <textarea [(ngModel)]="description"></textarea>
+            </div>
+
+            <div class="column">
+              <label>Create tickets by emailing:</label>
+              <span class="support-email">{{slug}}@inbox.yack.app</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="padding" *ngIf="tab == 1">
+        <div class="error" *ngIf="error">{{error}}</div>
+        <div class="notification" *ngIf="notification">{{notification}}</div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Heading</div>
+          <div class="inbox__row-field"><input type="text" placeholder="Heading" [(ngModel)]="widget.heading" /></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Introduction</div>
+          <div class="inbox__row-field"><textarea placeholder="Introduction" [(ngModel)]="widget.description"></textarea></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Hide screenshot & file buttons</div>
+          <div class="inbox__row-field"><input type="checkbox" [(ngModel)]="widget.hide" /></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Additional fields</div>
+          <div class="inbox__row-field">
+            <textarea placeholder="[Label,select,option 1,option 2]" [(ngModel)]="widget.fields" class="fields"></textarea>
+            <br/>
+            <div class="inbox_additional-fields">
+              [Label,select,option 1,option 2]<br/>
+              [Label,radio,option 1,option 2]<br/>
+              [Label,checkbox]<br/>
+              [Label,text]<br/>
+              [Label,textarea]
+            </div>
+          </div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Additional CSS</div>
+          <div class="inbox__row-field"><textarea placeholder="Custom styles" [(ngModel)]="widget.css"  class="css"></textarea></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Theme</div>
+          <div class="inbox__row-field">
+            <color-circle
+              width="200"
+              [color]="widget.color"
+              (onChangeComplete)="changeComplete($event)">
+            </color-circle>
+          </div>
+        </div>
+      </div>
+
+      <div class="padding" *ngIf="tab == 2">
+        <div class="error" *ngIf="error">{{error}}</div>
+        <div class="notification" *ngIf="notification">{{notification}}</div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Heading</div>
+          <div class="inbox__row-field"><input type="text" placeholder="Heading" [(ngModel)]="form.heading" /></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Introduction</div>
+          <div class="inbox__row-field"><textarea placeholder="Introduction" [(ngModel)]="form.description"></textarea></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Hide screenshot & file buttons</div>
+          <div class="inbox__row-field"><input type="checkbox" [(ngModel)]="form.hide" /></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Additional fields</div>
+          <div class="inbox__row-field">
+            <textarea placeholder="[Label,select,option 1,option 2]" [(ngModel)]="form.fields" class="fields"></textarea>
+            <br/>
+            <div class="inbox_additional-fields">
+              [Label,select,option 1,option 2]<br/>
+              [Label,radio,option 1,option 2]<br/>
+              [Label,checkbox]<br/>
+              [Label,text]<br/>
+              [Label,textarea]
+            </div>
+          </div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Additional CSS</div>
+          <div class="inbox__row-field"><textarea placeholder="Custom styles" [(ngModel)]="form.css"  class="css"></textarea></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Background color</div>
+          <div class="inbox__row-field"><ngx-colors ngx-colors-trigger [(ngModel)]="form.color_background"></ngx-colors></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Heading color</div>
+          <div class="inbox__row-field"><ngx-colors ngx-colors-trigger [(ngModel)]="form.color_heading"></ngx-colors></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Description color</div>
+          <div class="inbox__row-field"><ngx-colors ngx-colors-trigger [(ngModel)]="form.color_description"></ngx-colors></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Status pill background color</div>
+          <div class="inbox__row-field"><ngx-colors ngx-colors-trigger [(ngModel)]="form.color_status_pill_background"></ngx-colors></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Status pill text color</div>
+          <div class="inbox__row-field"><ngx-colors ngx-colors-trigger [(ngModel)]="form.color_status_pill_text"></ngx-colors></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Input label color</div>
+          <div class="inbox__row-field"><ngx-colors ngx-colors-trigger [(ngModel)]="form.color_input_label"></ngx-colors></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Input border color</div>
+          <div class="inbox__row-field"><ngx-colors ngx-colors-trigger [(ngModel)]="form.color_input_border"></ngx-colors></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Input background color</div>
+          <div class="inbox__row-field"><ngx-colors ngx-colors-trigger [(ngModel)]="form.color_input_background"></ngx-colors></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Input text color</div>
+          <div class="inbox__row-field"><ngx-colors ngx-colors-trigger [(ngModel)]="form.color_input_text"></ngx-colors></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Button background color</div>
+          <div class="inbox__row-field"><ngx-colors ngx-colors-trigger [(ngModel)]="form.color_button_background"></ngx-colors></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Button text color</div>
+          <div class="inbox__row-field"><ngx-colors ngx-colors-trigger [(ngModel)]="form.color_button_text"></ngx-colors></div>
+        </div>
+        <div class="inbox__row">
+          <div class="inbox__row-label">Yack logo color</div>
+          <div class="inbox__row-field"><ngx-colors ngx-colors-trigger [(ngModel)]="form.color_yack_logo"></ngx-colors></div>
+        </div>
+      </div>
+
+      <div class="padding" *ngIf="tab == 3">
+        <div class="error" *ngIf="error">{{error}}</div>
+        <div class="notification" *ngIf="notification">{{notification}}</div>
+
+        <div class="body-content">
+          <h1>Include the JS in your HTML:</h1>
+          <pre>&lt;script src="https://assets.yack.app/{{version}}.js"&gt;&lt;/script&gt;</pre>
+          <h1>Attach the widget to a button:</h1>
+          <pre>&lt;button id="yack.widget" data-inbox="{{slug}}"&gt;Launch Yack Popup&lt;/button&gt;</pre>
+          <h1>Or simply add a div for the form:</h1>
+          <pre>&lt;div id="yack.form" data-inbox="{{slug}}"&gt;&lt;/div&gt;</pre>
+          <p>
+            The DOM is automatically polled to look for a Yack widget or form mounting DIV.
+            In the event that you want manually initialize Yack (SPA, etc.), you can simply include the script
+            and initialize Yack like this:
+          </p>
+          <pre>
+Yack(&#123;
+  force: true,
+  widget: true,
+  form: true,
+&#125;)
+          </pre>
+        </div>
+      </div>
+
+      <div class="padding" *ngIf="tab == 4 && inboxId != 0">
+        <div *ngIf="!!active" class="premium">You're premium!</div>
+        <div class="plans">
+          <div class="plan">
+            <div class="price">
+              $5 <small>pm</small>
+            </div>
+            <div class="text">
+              Email channel ✓ <br/>
+              Widget channel ✓ <br/>
+              Form channel ✓ <br/>
+              Screenshots ✓ <br/>
+              Attachments ✓ <br/>
+              Custom fields ✓ <br/>
+              Custom colors ✓ <br/>
+              Unlimited replies ✓ <br/>
+              Unlimited issues ✓ <br/>
+              General awesomeness ✓
+            </div>
+            <button class="image-button current" (click)="active ? launchCustomerPortal() : openCheckout()">
+              {{active ? "Manage my subscription" : "Go premium now!"}}
+            </button>
+            <div class="description">
+              {{active ? "This will re-direct you to the customer portal." : "This will re-direct you to checkout."}}
+            </div>
+          </div>
+        </div>
+        <!--
+        <div class="date" (click)="launchCustomerPortal()" *ngIf="!!active">
+          Next billing date is {{current_period_end}}
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+  <div class="background"></div>
+</div>

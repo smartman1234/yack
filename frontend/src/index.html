@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Yack</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta name="theme-color" content="#563d7c">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js"></script>
+  <script src="https://assets.yack.app/0.1.0.js"></script>
+  <link rel="stylesheet" href="https://use.typekit.net/fsv1hpr.css">
+  <script src="https://js.stripe.com/v3"></script>
+
+  <script>
+    String.prototype.toSentenceCase = function() {
+      var array = this.valueOf().toLowerCase().split(' ');
+
+      for (var i = 0; i < array.length; i++) {
+        array[i] = array[i].charAt(0).toUpperCase() + array[i].slice(1);
+      }
+
+      return array.join(' ');
+    }
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>

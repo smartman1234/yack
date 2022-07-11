@@ -1,0 +1,319 @@
+  .inbox .content {
+    height: 80%;
+  }
+
+  .modal {
+    z-index: 100;
+  }
+
+  pre {
+    font-family: monospace;
+    color: #f1f3f5;
+    background-color: #21262A;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .inbox .error {
+    font-size: 13px;
+    background-color: #EF4056;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: white;
+    padding: 5px 5px 2px 5px;
+    border-radius: 4px;
+  }
+
+  .inbox .notification {
+    font-size: 13px;
+    color: #00a78e;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .inbox .image-button-row {
+    flex-direction: row;
+    align-items: center;
+    align-content: flex-start;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .inbox .image-button-row button {
+    margin: 0px;
+    margin-right: 10px;
+  }
+
+  .inbox .hide {
+    display: nones;
+  }
+
+  .inbox .plans {
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    justify-content: center;
+  }
+
+    .inbox .plans .plan {
+      flex-direction: column;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+      display: flex;
+      flex: 1;
+      border: 4px solid #f1f3f5;
+      padding: 10px;
+      margin: 5px;
+      border-radius: 10px;
+    }
+
+    .inbox .column {
+      flex-direction: column;
+      align-items: flex-start;
+      align-content: center;
+      justify-content: center;
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .inbox .premium {
+      color: #EF4056;
+      font-size: 26px;
+      text-align: center;
+      font-weight: 700;
+      padding-bottom: 20px;
+    }
+
+    .inbox .date {
+      color: #EF4056;
+      font-size: 13px;
+      text-align: center;
+      font-weight: 600;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+
+    .inbox .heading {
+      color: #21252a;
+      font-size: 25px;
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 50px;
+    }
+
+    .inbox .plans .plan .price {
+      color: #21252a;
+      font-size: 30px;
+      text-align: center;
+      font-weight: 600;
+      padding: 10px;
+    }
+
+    .inbox .plans .plan .text {
+      color: #21252a;
+      font-size: 20px;
+      text-align: center;
+      font-weight: 600;
+      padding: 10px;
+    }
+
+    .inbox .plans .plan .description {
+      color: #868e96;
+      font-size: 15px;
+      text-align: center;
+      font-weight: 400;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .inbox .plans .plan button {
+      color: #F3C32E;
+      background: #f1f3f5;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .inbox .plans .plan button.current {
+      background: #F3C32E;
+      color: white;
+    }
+
+.inbox .tab-content {
+  border-radius: 10px;
+  position: relative;
+  overflow: scroll;
+  height: 85%;
+}
+
+.inbox .tabs {
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  display: flex;
+  justify-content: flex-start;
+  height: 80px;
+  padding-left: 40px;
+  padding-right: 40px;
+  overflow: hidden;
+}
+
+  .inbox .tabs .buttons {
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+  }
+
+  .inbox .tabs .buttons button {
+    margin-right: 3px;
+  }
+
+  .inbox .tabs .buttons button:hover {
+    opacity: 0.75;
+  }
+
+  .inbox .tabs .buttons button.red {
+    background: #EF4056;
+  }
+
+  .inbox .tabs .tab {
+    color: #21252a;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px;
+    margin: 20px 15px 20px 0px;
+    box-sizing: border-box;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  .inbox button {
+    margin-left: auto;
+    margin-right: 0px;
+    color: white;
+    background: #F3C32E;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+
+  .inbox .tabs .tab:hover,
+  .inbox .tabs .tab.current {
+    border-bottom: 2px solid #21252a;
+  }
+
+  .inbox .inbox-image {
+    width: 100px;
+    height: 100px;
+    display: block;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    object-fit: contain;
+  }
+
+  .inbox .row {
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+  }
+
+  .inbox .body-content {
+    align-items: flex-start;
+  }
+
+  .inbox .flexer {
+    flex: 1;
+  }
+
+  .inbox .image {
+    padding-right: 20px;
+  }
+
+  .inbox .fields {
+    align-items: stretch;
+  }
+
+  .inbox .support-email {
+    color: #F3C32E;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  /* ----------------------------- */
+
+.inbox__row {
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: center;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.inbox__row-label {
+  flex: 1;
+  text-align: right;
+  margin-right: 20px;
+  text-transform: uppercase;
+  color: #adb5bd;
+  font-size: 11px;
+  font-weight: 500;
+  position: relative;
+  top: 8px;
+}
+
+.inbox__row-field {
+  flex: 4;
+  text-align: left;
+}
+
+.inbox__row-field input,
+.inbox__row-field textarea {
+  font-size: 13px;
+}
+
+.inbox__row-field input[type="checkbox"] {
+  width: auto;
+  height: 40px;
+}
+
+.inbox__row-field textarea.fields {
+  height: 100px;
+}
+
+.inbox__row-field textarea.css {
+  font-family: monospace;
+  height: 100px;
+  font-size: 11px;
+}
+
+.inbox_additional-fields {
+  font-size: 11px;
+  font-weight: 500;
+  font-family: monospace;
+  padding: 15px;
+  color: #f1f3f5;
+  background-color: #21262A;
+  border-radius: 10px;
+  position: relative;
+  top: -10px;
+}

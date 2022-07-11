@@ -1,0 +1,305 @@
+
+.widget-launch {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  opacity: 0.5;
+  transition: .2s opacity;
+  cursor: pointer;
+  z-index: 100;
+}
+
+  .widget-launch:hover {
+    opacity: 1;
+  }
+
+  .website button.big,
+  .website .button.big {
+    font-size: 20px;
+    font-weight: 800;
+    padding: 10px 25px 10px 25px;
+  }
+
+  .website button,
+  .website .button {
+    background-color: black;
+    color: white;
+    border: 0px;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 10px 25px 10px 25px;
+    cursor: pointer;
+  }
+
+  .website button:hover,
+  .website .button:hover {
+    opacity: .9;
+  }
+
+.website .row {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.website .row.inbox {
+  background-color: #f7cd3e;
+  background-image: url('../../assets/inbox-wow.svg');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 100% 500px;
+}
+
+.website .row.black { background-color: black; }
+
+.website .section {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1000px;
+  width: 80%;
+  box-sizing: border-box;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.website .header {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+  .website .header ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-right: auto;
+    margin-left: 30px;
+  }
+
+  .website .header ul li {
+    padding: 0px;
+    margin: 0px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .website .tag {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    z-index: 100;
+  }
+
+  .website .tag a {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .website .header ul li a {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0px;
+    margin: 0px;
+    margin-right: 20px;
+  }
+
+  .website .newsletter {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0px;
+    margin: 0px;
+    margin-right: auto;
+    margin-left: 20px;
+  }
+
+.website .inbox {
+  width: 100%;
+  position: relative;
+}
+
+.website .hero {
+  width: 100%;
+  position: relative;
+  padding-bottom: 30px;
+}
+
+  .website .hero .image {
+    height: 400px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 1;
+  }
+
+  .website .heading {
+    font-family: mencken-std-narrow, sans-serif;
+    color: white;
+    font-weight: normal;
+    font-size: 120px;
+    margin-bottom: 20px;
+    z-index: 2;
+    position: relative;
+  }
+
+  .website .heading.small {
+    font-size: 90px;
+  }
+
+  .website .subheading {
+    color: white;
+    line-height: 40px;
+    font-weight: normal;
+    font-size: 24px;
+    margin-bottom: 40px;
+    z-index: 2;
+    position: relative;
+  }
+
+  .website .subheading.small { font-size: 18px; }
+  .website .subheading.xsmall { font-size: 15px; }
+  .website .subheading.xxsmall { font-size: 12px; }
+
+  .website .heading.center,
+  .website .subheading.center {
+    text-align: center;
+  }
+
+  .website .subheading strong {
+    color: white;
+    line-height: 40px;
+    font-weight: bold;
+    font-size: inherit;
+  }
+
+.website a {
+  padding: 15px;
+  padding-top: 5px;
+  color: #980150;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.website p {
+  font-weight: 700;
+  color: #C56790;
+  padding-top: 15px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.website p strong {
+  font-weight: 900;
+  color: #C56790;
+  padding-top: 15px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.widget-wow {
+  position: absolute;
+  bottom: 0px;
+  right: 20px;
+  z-index: 50;
+  width: 250px;
+  height: 250px;
+}
+
+.website h1 {
+  font-family: mencken-std-narrow,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+}
+
+.website .hero-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.screen-inbox {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: relative;
+  margin-top: 0px;
+  top: 40px;
+  width: auto;
+  height: 400px;
+  display: block;
+  margin-left: 30px;
+  box-shadow: 0px 0px 65px -17px rgba(0,0,0,0.32);
+}
+
+.screen-widget {
+  width: 250px;
+  position: absolute;
+  right: 0px;
+  bottom: -40px;
+  box-shadow: 0px 0px 65px -17px rgba(0,0,0,0.32);
+}
+
+.yellow {
+  color: #F2C42B !important;
+}
+
+.website-modal {
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  background: white;
+  box-sizing: border-box;
+  padding: 30px;
+  overflow: scroll;
+  z-index: 100;
+  border-radius: 10px;
+  box-shadow: 0px 0px 300px -17px rgba(0,0,0,0.32);
+}
+
+.website-modal .close {
+  position: fixed;
+  z-index: 101;
+  top: 10px;
+  right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: black;
+  border: none;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 10px;
+}
