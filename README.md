@@ -4,3 +4,14 @@
 Yack is an archived project that I've gotten permission from <a href="https://yreeka.com">Yreeka</a> to share.
 
 Please see <a href="https://joduplessis.com/work/yack">my website</a> for more information.
+
+#### This project comes complete with:
+
+- Stripe checkout integration
+- SendGrid Parse webhook processing
+- ngrok npm script to automate everything
+- Processing incoming mail references to construct an accurate reply chain
+- Angular frontend
+- NestJS backend
+- Native JS widget bundled with Parcel
+- Custom form builder on the widget
