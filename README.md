@@ -3,6 +3,8 @@
 
 > Yack is an archived commercial project that I've gotten special permission to share. Please see <a href="https://joduplessis.com/work/yack">my website</a> for more information.
 
+![Screenshot](https://joduplessis.com/store-images/YackNew/02.png)
+
 #### This project comes complete with:
 
 - Stripe checkout integration
